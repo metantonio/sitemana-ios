@@ -136,12 +136,6 @@ struct ContentView: View {
                         }
                         .padding(.horizontal)
                         // Puedes agregar más botones aquí
-                        // Ejemplo:
-                        // Button(action: {
-                        //     // Acción para otro botón
-                        // }) {
-                        //     Text("Another Action")
-                        // }
                     }
 
                     // Agregar indicador de carga
