@@ -14,6 +14,7 @@ struct AddDomainView: View {
     @State private var isScanning: Bool = false  // Estado para controlar la vista de escaneo
     @State private var scannerResult: String? = nil  // Resultado del escaneo QR
     @Environment(\.dismiss) var dismiss  // Para poder cerrar la vista
+    var onSave: (() -> Void)? //función on closure para actualizar data cuando se pise el boton save
 
     var body: some View {
         NavigationStack {
@@ -43,6 +44,7 @@ struct AddDomainView: View {
                     if !newDomainId.isEmpty && !newWebsite.isEmpty {
                         knownDomainIds[newWebsite] = newDomainId
                         saveKnownDomainIds()  // Guarda los datos en UserDefaults
+                        onSave?()
                         dismiss()  // Cierra la vista
                     }
                 }

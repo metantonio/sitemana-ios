@@ -190,7 +190,10 @@ struct ContentView: View {
             }
 
             .sheet(isPresented: $showingAddDomainSheet) {
-                AddDomainView(knownDomainIds: $knownDomainIds)
+                AddDomainView(knownDomainIds: $knownDomainIds, onSave: {
+                    // Ejecutar tu función deseada aquí
+                    updateDomainId()
+                })
             }
 
         }
@@ -203,7 +206,12 @@ struct ContentView: View {
         }
     }
 
-    
+    func updateDomainId() {
+            print("Botón Save presionado")
+            if let firstKey = knownDomainIds.keys.first {
+                domainId = firstKey
+            }
+        }
 
     func save() {
         // Este método ahora guardará el `knownDomainIds` en UserDefaults
