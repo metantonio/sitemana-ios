@@ -23,6 +23,78 @@ struct ContentView: View {
 
     var body: some View {
         NavigationStack {
+            Form{
+                Section(header: Text("Domain ID").bold()) {
+                    VStack(alignment: .leading) {
+                        TextField(
+                            "Enter or select domain ID", text: $domainId
+                        )
+                        .disableAutocorrection(true)
+                        //.padding()
+                        .background(Color(.secondarySystemBackground))
+                        
+                        .cornerRadius(10)
+//                                .overlay(
+//                                    RoundedRectangle(cornerRadius: 10)
+//                                        .stroke(
+//                                            Color.gray.opacity(0.2),
+//                                            lineWidth: 1)
+//                                )
+                        Picker("Select Domain", selection: $domainId) {
+                            ForEach(
+                                knownDomainIds.keys.sorted(), id: \.self
+                            ) { key in
+                                Text(key).tag(key)
+                            }
+                        }
+                        .pickerStyle(MenuPickerStyle())
+                        .padding(.vertical, 2)
+                    }
+                }
+
+                Section(header: Text("Email").bold()) {
+                    TextField("Enter email", text: $email)
+                        .disableAutocorrection(true)
+                        //.padding()
+                        .background(Color(.secondarySystemBackground))
+                        .cornerRadius(10)
+//                                .overlay(
+//                                    RoundedRectangle(cornerRadius: 10)
+//                                        .stroke(
+//                                            Color.gray.opacity(0.2),
+//                                            lineWidth: 1)
+//                                )
+                }
+
+                Section(header: Text("Host").bold()) {
+                    TextField("Enter host", text: $host)
+                        .disableAutocorrection(true)
+                        //.padding()
+                        .background(Color(.secondarySystemBackground))
+                        .cornerRadius(10)
+//                                .overlay(
+//                                    RoundedRectangle(cornerRadius: 10)
+//                                        .stroke(
+//                                            Color.gray.opacity(0.2),
+//                                            lineWidth: 1)
+//                                )
+                }
+
+                Section(header: Text("CSV URL").bold()) {
+                    TextField("Enter CSV URL", text: $csvUrl)
+                        .disableAutocorrection(true)
+                        //.padding()
+                        .background(Color(.secondarySystemBackground))
+                        .cornerRadius(10)
+//                                .overlay(
+//                                    RoundedRectangle(cornerRadius: 10)
+//                                        .stroke(
+//                                            Color.gray.opacity(0.2),
+//                                            lineWidth: 1)
+//                                )
+                }
+            }
+                .navigationTitle("Data")
             ScrollView {  // Usar ScrollView para permitir desplazamiento
                 VStack(spacing: 20) {
                     // Formulario de entrada
@@ -325,5 +397,13 @@ struct ContentView: View {
                 }
             }
         }.resume()
+    }
+}
+
+struct ContentView_Previews: PreviewProvider {
+    static var previews: some View {
+        ContentView()
+            .previewDevice("iPhone 16 Pro")  // Specify the device if needed
+            .preferredColorScheme(.light)    // Optionally choose Light or Dark mode for preview
     }
 }
