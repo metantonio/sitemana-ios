@@ -62,7 +62,7 @@ struct ContentView: View {
             .navigationTitle("Data")
             .toolbar{
                 ToolbarItemGroup(placement: .navigationBarTrailing) {
-                    Button("Save", action: save)
+                    Button("Add domain ID", action: save)
                 }
             }
             
