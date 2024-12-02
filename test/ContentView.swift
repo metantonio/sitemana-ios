@@ -16,6 +16,7 @@ struct ContentView: View {
     @State private var message: String = ""
     @State private var isNavigating: Bool = false  // Estado para navegar cuando se reciben los resultados
     @State private var isLoading: Bool = false  // Estado para controlar la animación de carga
+    @State private var useDomain: Bool = false //Estado para usar en el daily Report
 
     let knownDomainIds = [
         "www.qlx.com": "672ce0eec9c8622bbea4e655"
@@ -23,158 +24,52 @@ struct ContentView: View {
 
     var body: some View {
         NavigationStack {
-            Form{
+            Form {
                 Section(header: Text("Domain ID").bold()) {
                     VStack(alignment: .leading) {
                         TextField(
                             "Enter or select domain ID", text: $domainId
                         )
                         .disableAutocorrection(true)
-                        //.padding()
-                        .background(Color(.secondarySystemBackground))
-                        
                         .cornerRadius(10)
-//                                .overlay(
-//                                    RoundedRectangle(cornerRadius: 10)
-//                                        .stroke(
-//                                            Color.gray.opacity(0.2),
-//                                            lineWidth: 1)
-//                                )
-                        Picker("Select Domain", selection: $domainId) {
+                        
+                        Picker("Or select a Domain", selection: $domainId) {
                             ForEach(
                                 knownDomainIds.keys.sorted(), id: \.self
                             ) { key in
-                                Text(key).tag(key)
+                                Text(key).tag(key).foregroundColor(Color("AccentColor"))
                             }
                         }
                         .pickerStyle(MenuPickerStyle())
-                        .padding(.vertical, 2)
+                        .padding(.vertical, 0)
+                        .foregroundColor(Color("AccentColor"))
                     }
+                    
                 }
 
-                Section(header: Text("Email").bold()) {
+                Section(header: Text("Supression data").bold()) {
                     TextField("Enter email", text: $email)
                         .disableAutocorrection(true)
-                        //.padding()
-                        .background(Color(.secondarySystemBackground))
                         .cornerRadius(10)
-//                                .overlay(
-//                                    RoundedRectangle(cornerRadius: 10)
-//                                        .stroke(
-//                                            Color.gray.opacity(0.2),
-//                                            lineWidth: 1)
-//                                )
-                }
-
-                Section(header: Text("Host").bold()) {
                     TextField("Enter host", text: $host)
                         .disableAutocorrection(true)
-                        //.padding()
-                        .background(Color(.secondarySystemBackground))
                         .cornerRadius(10)
-//                                .overlay(
-//                                    RoundedRectangle(cornerRadius: 10)
-//                                        .stroke(
-//                                            Color.gray.opacity(0.2),
-//                                            lineWidth: 1)
-//                                )
-                }
-
-                Section(header: Text("CSV URL").bold()) {
                     TextField("Enter CSV URL", text: $csvUrl)
                         .disableAutocorrection(true)
-                        //.padding()
-                        .background(Color(.secondarySystemBackground))
                         .cornerRadius(10)
-//                                .overlay(
-//                                    RoundedRectangle(cornerRadius: 10)
-//                                        .stroke(
-//                                            Color.gray.opacity(0.2),
-//                                            lineWidth: 1)
-//                                )
                 }
             }
-                .navigationTitle("Data")
+            .navigationTitle("Data")
+            .toolbar{
+                ToolbarItemGroup(placement: .navigationBarTrailing) {
+                    Button("Save", action: save)
+                }
+            }
+            
+            
             ScrollView {  // Usar ScrollView para permitir desplazamiento
+                
                 VStack(spacing: 20) {
-                    // Formulario de entrada
-                    VStack(alignment: .leading, spacing: 20) {
-                        Section(header: Text("Domain ID").bold()) {
-                            VStack(alignment: .leading) {
-                                TextField(
-                                    "Enter or select domain ID", text: $domainId
-                                )
-                                .disableAutocorrection(true)
-                                //.padding()
-                                .background(Color(.secondarySystemBackground))
-                                
-                                .cornerRadius(10)
-//                                .overlay(
-//                                    RoundedRectangle(cornerRadius: 10)
-//                                        .stroke(
-//                                            Color.gray.opacity(0.2),
-//                                            lineWidth: 1)
-//                                )
-                                Picker("Select Domain", selection: $domainId) {
-                                    ForEach(
-                                        knownDomainIds.keys.sorted(), id: \.self
-                                    ) { key in
-                                        Text(key).tag(key)
-                                    }
-                                }
-                                .pickerStyle(MenuPickerStyle())
-                                .padding(.vertical, 2)
-                            }
-                        }
-
-                        Section(header: Text("Email").bold()) {
-                            TextField("Enter email", text: $email)
-                                .disableAutocorrection(true)
-                                //.padding()
-                                .background(Color(.secondarySystemBackground))
-                                .cornerRadius(10)
-//                                .overlay(
-//                                    RoundedRectangle(cornerRadius: 10)
-//                                        .stroke(
-//                                            Color.gray.opacity(0.2),
-//                                            lineWidth: 1)
-//                                )
-                        }
-
-                        Section(header: Text("Host").bold()) {
-                            TextField("Enter host", text: $host)
-                                .disableAutocorrection(true)
-                                //.padding()
-                                .background(Color(.secondarySystemBackground))
-                                .cornerRadius(10)
-//                                .overlay(
-//                                    RoundedRectangle(cornerRadius: 10)
-//                                        .stroke(
-//                                            Color.gray.opacity(0.2),
-//                                            lineWidth: 1)
-//                                )
-                        }
-
-                        Section(header: Text("CSV URL").bold()) {
-                            TextField("Enter CSV URL", text: $csvUrl)
-                                .disableAutocorrection(true)
-                                //.padding()
-                                .background(Color(.secondarySystemBackground))
-                                .cornerRadius(10)
-//                                .overlay(
-//                                    RoundedRectangle(cornerRadius: 10)
-//                                        .stroke(
-//                                            Color.gray.opacity(0.2),
-//                                            lineWidth: 1)
-//                                )
-                        }
-                    }
-                    .textFieldStyle(.roundedBorder)
-                    .cornerRadius(10)
-                    .background(Color(.secondarySystemBackground))
-                    //.foregroundColor(Color("AccentColor"))
-                    .padding(.horizontal)
-
                     // Botones de acción
                     VStack {
                         if isLoading {
@@ -189,7 +84,7 @@ struct ContentView: View {
                             Text("Get Last 100 Visitors")
                                 .frame(maxWidth: .infinity)
                                 .padding()
-                                .background(Color.blue)
+                                .background(Color("AccentColor"))
                                 .foregroundColor(.white)
                                 .cornerRadius(8)
                         }
@@ -200,7 +95,7 @@ struct ContentView: View {
                             Text("Get Daily Report")
                                 .frame(maxWidth: .infinity)
                                 .padding()
-                                .background(Color.blue)
+                                .background(Color("AccentColor"))
                                 .foregroundColor(.white)
                                 .cornerRadius(8)
                         }
@@ -211,7 +106,7 @@ struct ContentView: View {
                             Text("Suppress Account Level")
                                 .frame(maxWidth: .infinity)
                                 .padding()
-                                .background(Color.blue)
+                                .background(Color("AccentColor"))
                                 .foregroundColor(.white)
                                 .cornerRadius(8)
                         }
@@ -223,7 +118,7 @@ struct ContentView: View {
                             Text("Suppress Domain Level")
                                 .frame(maxWidth: .infinity)
                                 .padding()
-                                .background(Color.blue)
+                                .background(Color("AccentColor"))
                                 .foregroundColor(.white)
                                 .cornerRadius(8)
                         }
@@ -235,7 +130,7 @@ struct ContentView: View {
                             Text("Suppress Contact CSV")
                                 .frame(maxWidth: .infinity)
                                 .padding()
-                                .background(Color.blue)
+                                .background(Color("AccentColor"))
                                 .foregroundColor(.white)
                                 .cornerRadius(8)
                         }
@@ -265,14 +160,19 @@ struct ContentView: View {
                 }
             }
             .navigationTitle("Sitemana API App")
-
+            
             // Navegar cuando los resultados se reciban
             .navigationDestination(isPresented: $isNavigating) {
                 VisitorListView(records: records)
             }
+            
         }
     }
 
+    func save(){
+        print("Pressed button")
+    }
+    
     func getDomainId() -> String {
         return knownDomainIds[domainId] ?? ""
     }
@@ -404,6 +304,6 @@ struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
             .previewDevice("iPhone 16 Pro")  // Specify the device if needed
-            .preferredColorScheme(.light)    // Optionally choose Light or Dark mode for preview
+            .preferredColorScheme(.dark)  // Optionally choose Light or Dark mode for preview
     }
 }
