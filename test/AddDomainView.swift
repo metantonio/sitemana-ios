@@ -1,11 +1,11 @@
+import AVFoundation
 //
 //  AddDomainView.swift
 //  test
 //
 //  Created by Antonio_martinez88@hotmail.com on 12/2/24.
 //
-import  SwiftUI
-import AVFoundation
+import SwiftUI
 
 struct AddDomainView: View {
     @Binding var knownDomainIds: [String: String]
@@ -30,7 +30,7 @@ struct AddDomainView: View {
                 // Botón para escanear código QR
                 Button("Scan QR Code") {
                     isScanning = true
-                    
+
                 }
                 .frame(maxWidth: .infinity)
                 .padding()
@@ -67,10 +67,11 @@ struct AddDomainView: View {
                 QRScannerView(result: $scannerResult) { scannedData in
                     // Suponiendo que el formato del QR es un diccionario JSON con "domainId" y "website"
                     if let data = parseQRCodeData(scannedData) {
-                        knownDomainIds[data["domainId"] ?? ""] = data["website"]
-                        UserDefaults.standard.set(
-                            knownDomainIds, forKey: "knownDomainIds")
-                        dismiss()  // Cerrar la vista al agregar el dominio desde el QR
+                        print("data: \(data)")
+                        // Asignar los valores escaneados a las variables de estado
+                        newDomainId = data["domainId"] ?? ""
+                        newWebsite = data["website"] ?? ""
+                        print("Domain ID: \(newDomainId), Website: \(newWebsite)")
                     }
                     isScanning = false  // Detener el escaneo
                 }
