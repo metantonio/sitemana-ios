@@ -15,6 +15,8 @@ struct ContentView: View {
     @State private var records: [[String: Any]] = []  // Lista de diccionarios dinámicos
     @State private var message: String = ""
     @State private var isNavigating: Bool = false  // Estado para navegar cuando se reciben los resultados
+    @State private var isLoading: Bool = false  // Estado para controlar la animación de carga
+    
 
     let knownDomainIds = [
         "www.qlx.com": "672ce0eec9c8622bbea4e655"
@@ -61,6 +63,12 @@ struct ContentView: View {
 
                     // Botones de acción
                     VStack {
+                        if isLoading {
+                            ProgressView("Loading...")
+                                .progressViewStyle(CircularProgressViewStyle())
+                                .padding()
+                        }
+                        
                         Button(action: {
                             getLast100Visitors()
                         }) {
@@ -110,6 +118,13 @@ struct ContentView: View {
                         //     Text("Another Action")
                         // }
                     }
+                    
+                    // Agregar indicador de carga
+                    if isLoading {
+                        ProgressView("Loading...")
+                            .progressViewStyle(CircularProgressViewStyle())
+                            .padding()
+                    }
 
                     // Mostrar mensaje de estado
                     if !message.isEmpty {
@@ -148,8 +163,16 @@ struct ContentView: View {
 
     func makeApiRequest(urlString: String) {
         guard let url = URL(string: urlString) else { return }
+        
+        DispatchQueue.main.async {
+                    self.isLoading = true  // Mostrar animación de carga
+                }
 
         URLSession.shared.dataTask(with: url) { data, response, error in
+            DispatchQueue.main.async {
+                            self.isLoading = false  // Ocultar animación de carga
+                        }
+            
             if let error = error {
                 DispatchQueue.main.async {
                     message = "Error: \(error.localizedDescription)"
@@ -219,7 +242,14 @@ struct ContentView: View {
         request.httpBody = try? JSONSerialization.data(
             withJSONObject: parameters)
 
+        DispatchQueue.main.async {
+                    self.isLoading = true  // Mostrar animación de carga
+                }
+        
         URLSession.shared.dataTask(with: request) { data, response, error in
+            DispatchQueue.main.async {
+                        self.isLoading = false  // Ocultar animación de carga
+                    }
             if let error = error {
                 DispatchQueue.main.async {
                     message = "Error: \(error.localizedDescription)"

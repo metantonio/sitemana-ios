@@ -11,7 +11,7 @@ struct VisitorListView: View {
     var records: [[String: Any]] // Recibe los registros desde ContentView
     
     var body: some View {
-        Section(header: Text("Visitor List")) {
+        Section(header: Text("Response")) {
             List(records, id: \.uniqueId) { record in
                 VStack(alignment: .leading) {
                     ForEach(record.keys.sorted(), id: \.self) { key in
