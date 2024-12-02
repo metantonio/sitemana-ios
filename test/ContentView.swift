@@ -16,7 +16,6 @@ struct ContentView: View {
     @State private var message: String = ""
     @State private var isNavigating: Bool = false  // Estado para navegar cuando se reciben los resultados
     @State private var isLoading: Bool = false  // Estado para controlar la animación de carga
-    
 
     let knownDomainIds = [
         "www.qlx.com": "672ce0eec9c8622bbea4e655"
@@ -27,38 +26,81 @@ struct ContentView: View {
             ScrollView {  // Usar ScrollView para permitir desplazamiento
                 VStack(spacing: 20) {
                     // Formulario de entrada
-                    VStack(alignment: .leading) {
-                        Section(header: Text("Domain ID")) {
-                            TextField(
-                                "Enter or select domain ID", text: $domainId
-                            )
-                            .padding()
-                            Picker("Select Domain", selection: $domainId) {
-                                ForEach(
-                                    knownDomainIds.keys.sorted(), id: \.self
-                                ) { key in
-                                    Text(key).tag(key)
+                    VStack(alignment: .leading, spacing: 20) {
+                        Section(header: Text("Domain ID").bold()) {
+                            VStack(alignment: .leading) {
+                                TextField(
+                                    "Enter or select domain ID", text: $domainId
+                                )
+                                .disableAutocorrection(true)
+                                //.padding()
+                                .background(Color(.secondarySystemBackground))
+                                
+                                .cornerRadius(10)
+//                                .overlay(
+//                                    RoundedRectangle(cornerRadius: 10)
+//                                        .stroke(
+//                                            Color.gray.opacity(0.2),
+//                                            lineWidth: 1)
+//                                )
+                                Picker("Select Domain", selection: $domainId) {
+                                    ForEach(
+                                        knownDomainIds.keys.sorted(), id: \.self
+                                    ) { key in
+                                        Text(key).tag(key)
+                                    }
                                 }
+                                .pickerStyle(MenuPickerStyle())
+                                .padding(.vertical, 2)
                             }
-                            .pickerStyle(MenuPickerStyle())
-                            .padding()
                         }
 
-                        Section(header: Text("Email")) {
+                        Section(header: Text("Email").bold()) {
                             TextField("Enter email", text: $email)
-                                .padding()
+                                .disableAutocorrection(true)
+                                //.padding()
+                                .background(Color(.secondarySystemBackground))
+                                .cornerRadius(10)
+//                                .overlay(
+//                                    RoundedRectangle(cornerRadius: 10)
+//                                        .stroke(
+//                                            Color.gray.opacity(0.2),
+//                                            lineWidth: 1)
+//                                )
                         }
 
-                        Section(header: Text("Host")) {
+                        Section(header: Text("Host").bold()) {
                             TextField("Enter host", text: $host)
-                                .padding()
+                                .disableAutocorrection(true)
+                                //.padding()
+                                .background(Color(.secondarySystemBackground))
+                                .cornerRadius(10)
+//                                .overlay(
+//                                    RoundedRectangle(cornerRadius: 10)
+//                                        .stroke(
+//                                            Color.gray.opacity(0.2),
+//                                            lineWidth: 1)
+//                                )
                         }
 
-                        Section(header: Text("CSV URL")) {
+                        Section(header: Text("CSV URL").bold()) {
                             TextField("Enter CSV URL", text: $csvUrl)
-                                .padding()
+                                .disableAutocorrection(true)
+                                //.padding()
+                                .background(Color(.secondarySystemBackground))
+                                .cornerRadius(10)
+//                                .overlay(
+//                                    RoundedRectangle(cornerRadius: 10)
+//                                        .stroke(
+//                                            Color.gray.opacity(0.2),
+//                                            lineWidth: 1)
+//                                )
                         }
                     }
+                    .textFieldStyle(.roundedBorder)
+                    .cornerRadius(10)
+                    .background(Color(.secondarySystemBackground))
+                    //.foregroundColor(Color("AccentColor"))
                     .padding(.horizontal)
 
                     // Botones de acción
@@ -68,7 +110,7 @@ struct ContentView: View {
                                 .progressViewStyle(CircularProgressViewStyle())
                                 .padding()
                         }
-                        
+
                         Button(action: {
                             getLast100Visitors()
                         }) {
@@ -134,7 +176,7 @@ struct ContentView: View {
                         //     Text("Another Action")
                         // }
                     }
-                    
+
                     // Agregar indicador de carga
                     if isLoading {
                         ProgressView("Loading...")
@@ -179,16 +221,16 @@ struct ContentView: View {
 
     func makeApiRequest(urlString: String) {
         guard let url = URL(string: urlString) else { return }
-        
+
         DispatchQueue.main.async {
-                    self.isLoading = true  // Mostrar animación de carga
-                }
+            self.isLoading = true  // Mostrar animación de carga
+        }
 
         URLSession.shared.dataTask(with: url) { data, response, error in
             DispatchQueue.main.async {
-                            self.isLoading = false  // Ocultar animación de carga
-                        }
-            
+                self.isLoading = false  // Ocultar animación de carga
+            }
+
             if let error = error {
                 DispatchQueue.main.async {
                     message = "Error: \(error.localizedDescription)"
@@ -259,13 +301,13 @@ struct ContentView: View {
             withJSONObject: parameters)
 
         DispatchQueue.main.async {
-                    self.isLoading = true  // Mostrar animación de carga
-                }
-        
+            self.isLoading = true  // Mostrar animación de carga
+        }
+
         URLSession.shared.dataTask(with: request) { data, response, error in
             DispatchQueue.main.async {
-                        self.isLoading = false  // Ocultar animación de carga
-                    }
+                self.isLoading = false  // Ocultar animación de carga
+            }
             if let error = error {
                 DispatchQueue.main.async {
                     message = "Error: \(error.localizedDescription)"
