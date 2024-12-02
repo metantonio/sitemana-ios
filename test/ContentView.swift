@@ -85,6 +85,10 @@ struct ContentView: View {
                         }) {
                             Text("Get Daily Report")
                                 .frame(maxWidth: .infinity)
+                                .padding()
+                                .background(Color.blue)
+                                .foregroundColor(.white)
+                                .cornerRadius(8)
                         }
                         .padding()
                         Button(action: {
@@ -92,6 +96,10 @@ struct ContentView: View {
                         }) {
                             Text("Suppress Account Level")
                                 .frame(maxWidth: .infinity)
+                                .padding()
+                                .background(Color.blue)
+                                .foregroundColor(.white)
+                                .cornerRadius(8)
                         }
                         .padding()
 
@@ -100,6 +108,10 @@ struct ContentView: View {
                         }) {
                             Text("Suppress Domain Level")
                                 .frame(maxWidth: .infinity)
+                                .padding()
+                                .background(Color.blue)
+                                .foregroundColor(.white)
+                                .cornerRadius(8)
                         }
                         .padding()
 
@@ -108,6 +120,10 @@ struct ContentView: View {
                         }) {
                             Text("Suppress Contact CSV")
                                 .frame(maxWidth: .infinity)
+                                .padding()
+                                .background(Color.blue)
+                                .foregroundColor(.white)
+                                .cornerRadius(8)
                         }
                         .padding()
                         // Puedes agregar más botones aquí
