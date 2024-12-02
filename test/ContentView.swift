@@ -90,7 +90,7 @@ struct ContentView: View {
                                 .foregroundColor(.white)
                                 .cornerRadius(8)
                         }
-                        .padding()
+                        .padding(.horizontal)
                         Button(action: {
                             suppressAccountLevel()
                         }) {
@@ -101,7 +101,7 @@ struct ContentView: View {
                                 .foregroundColor(.white)
                                 .cornerRadius(8)
                         }
-                        .padding()
+                        .padding(.horizontal)
 
                         Button(action: {
                             suppressDomainLevel()
@@ -113,7 +113,7 @@ struct ContentView: View {
                                 .foregroundColor(.white)
                                 .cornerRadius(8)
                         }
-                        .padding()
+                        .padding(.horizontal)
 
                         Button(action: {
                             suppressContactCSV()
@@ -125,7 +125,7 @@ struct ContentView: View {
                                 .foregroundColor(.white)
                                 .cornerRadius(8)
                         }
-                        .padding()
+                        .padding(.horizontal)
                         // Puedes agregar más botones aquí
                         // Ejemplo:
                         // Button(action: {
