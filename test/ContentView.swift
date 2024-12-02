@@ -8,8 +8,25 @@
 import AVFoundation
 import SwiftUI
 
+// Recuperar los datos desde UserDefaults
+// Función para cargar los Domain IDs desde UserDefaults
+func loadKnownDomainIds() -> [String: String] {
+    if let data = UserDefaults.standard.data(forKey: "knownDomainIds"),
+       let domainIds = try? JSONDecoder().decode([String: String].self, from: data) {
+        return domainIds
+    }
+    return [:]
+}
+
+// Función para guardar los Domain IDs en UserDefaults
+func saveKnownDomainIds(_ domainIds: [String: String]) {
+    if let data = try? JSONEncoder().encode(domainIds) {
+        UserDefaults.standard.set(data, forKey: "knownDomainIds")
+    }
+}
+
 struct ContentView: View {
-    @State private var domainId: String = "www.qlx.com"
+    @State private var domainId: String = ""
     @State private var email: String = ""
     @State private var host: String = ""
     @State private var csvUrl: String = ""
@@ -18,9 +35,14 @@ struct ContentView: View {
     @State private var isNavigating: Bool = false  // Estado para navegar cuando se reciben los resultados
     @State private var isLoading: Bool = false  // Estado para controlar la animación de carga
     @State private var useDomain: Bool = false  //Estado para usar en el daily Report
-    @State private var knownDomainIds: [String: String] =
-        UserDefaults.standard.object(forKey: "knownDomainIds")
-        as? [String: String] ?? [:]
+    @State private var knownDomainIds: [String: String] = [:]
+
+    init() {
+        _knownDomainIds = State(initialValue: loadKnownDomainIds())
+        if let firstKey = _knownDomainIds.wrappedValue.keys.first {
+            _domainId = State(initialValue: firstKey)
+        }
+    }
     @State private var showingAddDomainSheet: Bool = false
     //    let knownDomainIds = [
     //        "www.qlx.com": "672ce0eec9c8622bbea4e655"
@@ -173,6 +195,15 @@ struct ContentView: View {
 
         }
     }
+
+    func saveKnownDomainIds() {
+        // Convertir el diccionario en datos JSON
+        if let encodedData = try? JSONEncoder().encode(knownDomainIds) {
+            UserDefaults.standard.set(encodedData, forKey: "knownDomainIds")
+        }
+    }
+
+    
 
     func save() {
         // Este método ahora guardará el `knownDomainIds` en UserDefaults
@@ -339,10 +370,9 @@ struct AddDomainView: View {
                 // Botón para guardar
                 Button("Save") {
                     if !newDomainId.isEmpty && !newWebsite.isEmpty {
-                        knownDomainIds[newDomainId] = newWebsite
-                        UserDefaults.standard.set(
-                            knownDomainIds, forKey: "knownDomainIds")
-                        dismiss()  // Cerrar la vista al guardar
+                        knownDomainIds[newWebsite] = newDomainId
+                        saveKnownDomainIds()  // Guarda los datos en UserDefaults
+                        dismiss()  // Cierra la vista
                     }
                 }
                 .padding()
@@ -373,88 +403,118 @@ struct AddDomainView: View {
                 }
             }
         }
+
     }
     // Función para parsear los datos del QR, asumiendo un formato tipo JSON en el QR
-        func parseQRCodeData(_ qrString: String) -> [String: String]? {
-            if let data = qrString.data(using: .utf8),
-               let json = try? JSONSerialization.jsonObject(with: data) as? [String: String] {
-                return json
-            }
-            return nil
+    func parseQRCodeData(_ qrString: String) -> [String: String]? {
+        if let data = qrString.data(using: .utf8),
+            let json = try? JSONSerialization.jsonObject(with: data)
+                as? [String: String]
+        {
+            return json
         }
+        return nil
+    }
+    func saveKnownDomainIds() {
+        // Convertir el diccionario en datos JSON
+        if let encodedData = try? JSONEncoder().encode(knownDomainIds) {
+            UserDefaults.standard.set(encodedData, forKey: "knownDomainIds")
+        }
+    }
+
+    // Recuperar los datos desde UserDefaults
+    func loadKnownDomainIds() {
+        if let savedData = UserDefaults.standard.data(forKey: "knownDomainIds"),
+            let decodedDomainIds = try? JSONDecoder().decode(
+                [String: String].self, from: savedData)
+        {
+            knownDomainIds = decodedDomainIds
+        }
+    }
 }
 
 struct QRScannerView: UIViewControllerRepresentable {
     @Binding var result: String?
     var onFound: (String) -> Void
-    
+
     class Coordinator: NSObject, AVCaptureMetadataOutputObjectsDelegate {
         var parent: QRScannerView
-        
+
         init(parent: QRScannerView) {
             self.parent = parent
         }
-        
+
         func metadataOutput(
             _ output: AVCaptureMetadataOutput,
             didOutput metadataObjects: [AVMetadataObject],
             from connection: AVCaptureConnection
         ) {
             if let metadataObject = metadataObjects.first {
-                guard let readableObject = metadataObject as? AVMetadataMachineReadableCodeObject else { return }
-                guard let stringValue = readableObject.stringValue else { return }
-                AudioServicesPlaySystemSound(SystemSoundID(kSystemSoundID_Vibrate))
+                guard
+                    let readableObject = metadataObject
+                        as? AVMetadataMachineReadableCodeObject
+                else { return }
+                guard let stringValue = readableObject.stringValue else {
+                    return
+                }
+                AudioServicesPlaySystemSound(
+                    SystemSoundID(kSystemSoundID_Vibrate))
                 parent.result = stringValue
                 parent.onFound(stringValue)  // Procesar el resultado del escaneo
             }
         }
     }
-    
+
     func makeCoordinator() -> Coordinator {
         return Coordinator(parent: self)
     }
-    
+
     func makeUIViewController(context: Context) -> UIViewController {
         let viewController = UIViewController()
         let captureSession = AVCaptureSession()
-        
-        guard let videoCaptureDevice = AVCaptureDevice.default(for: .video) else { return viewController }
+
+        guard let videoCaptureDevice = AVCaptureDevice.default(for: .video)
+        else { return viewController }
         let videoDeviceInput: AVCaptureDeviceInput
-        
+
         do {
-            videoDeviceInput = try AVCaptureDeviceInput(device: videoCaptureDevice)
+            videoDeviceInput = try AVCaptureDeviceInput(
+                device: videoCaptureDevice)
         } catch {
             return viewController
         }
-        
-        if (captureSession.canAddInput(videoDeviceInput)) {
+
+        if captureSession.canAddInput(videoDeviceInput) {
             captureSession.addInput(videoDeviceInput)
         } else {
             return viewController
         }
-        
+
         let metadataOutput = AVCaptureMetadataOutput()
-        
-        if (captureSession.canAddOutput(metadataOutput)) {
+
+        if captureSession.canAddOutput(metadataOutput) {
             captureSession.addOutput(metadataOutput)
-            
-            metadataOutput.setMetadataObjectsDelegate(context.coordinator, queue: DispatchQueue.main)
+
+            metadataOutput.setMetadataObjectsDelegate(
+                context.coordinator, queue: DispatchQueue.main)
             metadataOutput.metadataObjectTypes = [.qr]  // Solo escanear códigos QR
         } else {
             return viewController
         }
-        
+
         let previewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
         previewLayer.frame = viewController.view.layer.bounds
         previewLayer.videoGravity = .resizeAspectFill
         viewController.view.layer.addSublayer(previewLayer)
-        
+
         captureSession.startRunning()
-        
+
         return viewController
     }
-    
-    func updateUIViewController(_ uiViewController: UIViewController, context: Context) {}
+
+    func updateUIViewController(
+        _ uiViewController: UIViewController, context: Context
+    ) {}
 }
 
 struct ContentView_Previews: PreviewProvider {
