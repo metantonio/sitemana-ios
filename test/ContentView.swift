@@ -59,7 +59,7 @@ struct ContentView: View {
                         .cornerRadius(10)
                 }
             }
-            .navigationTitle("Data")
+            .navigationTitle("Sitemana API")
             .toolbar{
                 ToolbarItemGroup(placement: .navigationBarTrailing) {
                     Button("Add domain ID", action: save)
