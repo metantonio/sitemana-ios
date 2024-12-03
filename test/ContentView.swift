@@ -12,7 +12,9 @@ import SwiftUI
 // Función para cargar los Domain IDs desde UserDefaults
 func loadKnownDomainIds() -> [String: String] {
     if let data = UserDefaults.standard.data(forKey: "knownDomainIds"),
-       let domainIds = try? JSONDecoder().decode([String: String].self, from: data) {
+        let domainIds = try? JSONDecoder().decode(
+            [String: String].self, from: data)
+    {
         return domainIds
     }
     return [:]
@@ -34,168 +36,201 @@ struct ContentView: View {
     @State private var message: String = ""
     @State private var isNavigating: Bool = false  // Estado para navegar cuando se reciben los resultados
     @State private var isLoading: Bool = false  // Estado para controlar la animación de carga
+    @State private var isLoadingScreen: Bool = true  // Estado para controlar la animación carga de pantalla de la app
     @State private var useDomain: Bool = false  //Estado para usar en el daily Report
     @State private var knownDomainIds: [String: String] = [:]
 
-    init() {
-        _knownDomainIds = State(initialValue: loadKnownDomainIds())
-        if let firstKey = _knownDomainIds.wrappedValue.keys.first {
-            _domainId = State(initialValue: firstKey)
-        }
-    }
     @State private var showingAddDomainSheet: Bool = false
     //    let knownDomainIds = [
     //        "www.qlx.com": "672ce0eec9c8622bbea4e655"
     //    ]
 
-    var body: some View {
-        NavigationStack {
-            Form {
-                Section(header: Text("Domain ID").bold()) {
-                    VStack(alignment: .leading) {
-                        TextField(
-                            "Enter or select domain ID", text: $domainId
-                        )
-                        .disableAutocorrection(true)
-                        .cornerRadius(10)
+    //    init() {
+    //        _knownDomainIds = State(initialValue: loadKnownDomainIds())
+    //        if let firstKey = _knownDomainIds.wrappedValue.keys.first {
+    //            _domainId = State(initialValue: firstKey)
+    //        }
+    //        // Simular carga inicial
+    //        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+    //            isLoadingScreen = false
+    //        }
+    //    }
 
-                        Picker("Or select a Domain", selection: $domainId) {
-                            ForEach(
-                                knownDomainIds.keys.sorted(), id: \.self
-                            ) { key in
-                                Text(key).tag(key).foregroundColor(
-                                    Color("AccentColor"))
+    var body: some View {
+        Group {
+            if isLoadingScreen {
+                LoadingAppView()
+            } else {
+                NavigationStack {
+                    Form {
+                        Section(header: Text("Domain ID").bold()) {
+                            VStack(alignment: .leading) {
+                                TextField(
+                                    "Enter or select domain ID", text: $domainId
+                                )
+                                .disableAutocorrection(true)
+                                .cornerRadius(10)
+
+                                Picker(
+                                    "Or select a Domain", selection: $domainId
+                                ) {
+                                    ForEach(
+                                        knownDomainIds.keys.sorted(), id: \.self
+                                    ) { key in
+                                        Text(key).tag(key).foregroundColor(
+                                            Color("AccentColor"))
+                                    }
+                                }
+                                .pickerStyle(MenuPickerStyle())
+                                .padding(.vertical, 0)
+                                .foregroundColor(Color("AccentColor"))
+                            }
+
+                        }
+
+                        Section(header: Text("Supression data").bold()) {
+                            TextField("Enter email", text: $email)
+                                .disableAutocorrection(true)
+                                .cornerRadius(10)
+                            TextField("Enter host", text: $host)
+                                .disableAutocorrection(true)
+                                .cornerRadius(10)
+                            TextField("Enter CSV URL", text: $csvUrl)
+                                .disableAutocorrection(true)
+                                .cornerRadius(10)
+                        }
+                    }
+                    .navigationTitle("Sitemana API")
+                    .toolbar {
+                        ToolbarItemGroup(placement: .navigationBarTrailing) {
+                            //Button("Add domain ID", action: save)
+                            Button("Add domain ID") {
+                                showingAddDomainSheet = true
                             }
                         }
-                        .pickerStyle(MenuPickerStyle())
-                        .padding(.vertical, 0)
-                        .foregroundColor(Color("AccentColor"))
+                    }
+
+                    ScrollView {  // Usar ScrollView para permitir desplazamiento
+
+                        VStack(spacing: 20) {
+                            // Botones de acción
+                            VStack {
+                                if isLoading {
+                                    ProgressView("Loading...")
+                                        .progressViewStyle(
+                                            CircularProgressViewStyle()
+                                        )
+                                        .padding()
+                                }
+
+                                Button(action: {
+                                    getLast100Visitors()
+                                }) {
+                                    Text("Get Last 100 Visitors")
+                                        .frame(maxWidth: .infinity)
+                                        .padding()
+                                        .background(Color("AccentColor"))
+                                        .foregroundColor(.white)
+                                        .cornerRadius(8)
+                                }
+                                .padding(.horizontal)
+                                Button(action: {
+                                    getDailyReport()
+                                }) {
+                                    Text("Get Daily Report")
+                                        .frame(maxWidth: .infinity)
+                                        .padding()
+                                        .background(Color("AccentColor"))
+                                        .foregroundColor(.white)
+                                        .cornerRadius(8)
+                                }
+                                .padding(.horizontal)
+                                Button(action: {
+                                    suppressAccountLevel()
+                                }) {
+                                    Text("Suppress Account Level")
+                                        .frame(maxWidth: .infinity)
+                                        .padding()
+                                        .background(Color("AccentColor"))
+                                        .foregroundColor(.white)
+                                        .cornerRadius(8)
+                                }
+                                .padding(.horizontal)
+
+                                Button(action: {
+                                    suppressDomainLevel()
+                                }) {
+                                    Text("Suppress Domain Level")
+                                        .frame(maxWidth: .infinity)
+                                        .padding()
+                                        .background(Color("AccentColor"))
+                                        .foregroundColor(.white)
+                                        .cornerRadius(8)
+                                }
+                                .padding(.horizontal)
+
+                                Button(action: {
+                                    suppressContactCSV()
+                                }) {
+                                    Text("Suppress Contact CSV")
+                                        .frame(maxWidth: .infinity)
+                                        .padding()
+                                        .background(Color("AccentColor"))
+                                        .foregroundColor(.white)
+                                        .cornerRadius(8)
+                                }
+                                .padding(.horizontal)
+                                // Puedes agregar más botones aquí
+                            }
+
+                            // Agregar indicador de carga
+                            if isLoading {
+                                ProgressView("Loading...")
+                                    .progressViewStyle(
+                                        CircularProgressViewStyle()
+                                    )
+                                    .padding()
+                            }
+
+                            // Mostrar mensaje de estado
+                            if !message.isEmpty {
+                                Text(message)
+                                    .foregroundColor(.red)
+                                    .padding()
+                            }
+                        }
+                    }
+                    .navigationTitle("Sitemana API App")
+
+                    // Navegar cuando los resultados se reciban
+                    .navigationDestination(isPresented: $isNavigating) {
+                        VisitorListView(records: records)
+                    }
+
+                    .sheet(isPresented: $showingAddDomainSheet) {
+                        AddDomainView(
+                            knownDomainIds: $knownDomainIds,
+                            onSave: {
+                                // Ejecutar tu función deseada aquí
+                                updateDomainId()
+                            })
                     }
 
                 }
-
-                Section(header: Text("Supression data").bold()) {
-                    TextField("Enter email", text: $email)
-                        .disableAutocorrection(true)
-                        .cornerRadius(10)
-                    TextField("Enter host", text: $host)
-                        .disableAutocorrection(true)
-                        .cornerRadius(10)
-                    TextField("Enter CSV URL", text: $csvUrl)
-                        .disableAutocorrection(true)
-                        .cornerRadius(10)
-                }
             }
-            .navigationTitle("Sitemana API")
-            .toolbar {
-                ToolbarItemGroup(placement: .navigationBarTrailing) {
-                    //Button("Add domain ID", action: save)
-                    Button("Add domain ID") {
-                        showingAddDomainSheet = true
-                    }
-                }
-            }
+        }
+        .onAppear {
+            self.loadInitialData()
+        }
+    }
 
-            ScrollView {  // Usar ScrollView para permitir desplazamiento
-
-                VStack(spacing: 20) {
-                    // Botones de acción
-                    VStack {
-                        if isLoading {
-                            ProgressView("Loading...")
-                                .progressViewStyle(CircularProgressViewStyle())
-                                .padding()
-                        }
-
-                        Button(action: {
-                            getLast100Visitors()
-                        }) {
-                            Text("Get Last 100 Visitors")
-                                .frame(maxWidth: .infinity)
-                                .padding()
-                                .background(Color("AccentColor"))
-                                .foregroundColor(.white)
-                                .cornerRadius(8)
-                        }
-                        .padding(.horizontal)
-                        Button(action: {
-                            getDailyReport()
-                        }) {
-                            Text("Get Daily Report")
-                                .frame(maxWidth: .infinity)
-                                .padding()
-                                .background(Color("AccentColor"))
-                                .foregroundColor(.white)
-                                .cornerRadius(8)
-                        }
-                        .padding(.horizontal)
-                        Button(action: {
-                            suppressAccountLevel()
-                        }) {
-                            Text("Suppress Account Level")
-                                .frame(maxWidth: .infinity)
-                                .padding()
-                                .background(Color("AccentColor"))
-                                .foregroundColor(.white)
-                                .cornerRadius(8)
-                        }
-                        .padding(.horizontal)
-
-                        Button(action: {
-                            suppressDomainLevel()
-                        }) {
-                            Text("Suppress Domain Level")
-                                .frame(maxWidth: .infinity)
-                                .padding()
-                                .background(Color("AccentColor"))
-                                .foregroundColor(.white)
-                                .cornerRadius(8)
-                        }
-                        .padding(.horizontal)
-
-                        Button(action: {
-                            suppressContactCSV()
-                        }) {
-                            Text("Suppress Contact CSV")
-                                .frame(maxWidth: .infinity)
-                                .padding()
-                                .background(Color("AccentColor"))
-                                .foregroundColor(.white)
-                                .cornerRadius(8)
-                        }
-                        .padding(.horizontal)
-                        // Puedes agregar más botones aquí
-                    }
-
-                    // Agregar indicador de carga
-                    if isLoading {
-                        ProgressView("Loading...")
-                            .progressViewStyle(CircularProgressViewStyle())
-                            .padding()
-                    }
-
-                    // Mostrar mensaje de estado
-                    if !message.isEmpty {
-                        Text(message)
-                            .foregroundColor(.red)
-                            .padding()
-                    }
-                }
-            }
-            .navigationTitle("Sitemana API App")
-
-            // Navegar cuando los resultados se reciban
-            .navigationDestination(isPresented: $isNavigating) {
-                VisitorListView(records: records)
-            }
-
-            .sheet(isPresented: $showingAddDomainSheet) {
-                AddDomainView(knownDomainIds: $knownDomainIds, onSave: {
-                    // Ejecutar tu función deseada aquí
-                    updateDomainId()
-                })
-            }
-
+    func loadInitialData() {
+        knownDomainIds = loadKnownDomainIds()
+        if let firstKey = knownDomainIds.keys.first {
+            domainId = firstKey
+        }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+            isLoadingScreen = false
         }
     }
 
@@ -207,11 +242,11 @@ struct ContentView: View {
     }
 
     func updateDomainId() {
-            print("Botón Save presionado")
-            if let firstKey = knownDomainIds.keys.first {
-                domainId = firstKey
-            }
+        print("Botón Save presionado")
+        if let firstKey = knownDomainIds.keys.first {
+            domainId = firstKey
         }
+    }
 
     func save() {
         // Este método ahora guardará el `knownDomainIds` en UserDefaults
@@ -345,8 +380,6 @@ struct ContentView: View {
         }.resume()
     }
 }
-
-
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
