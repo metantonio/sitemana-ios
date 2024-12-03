@@ -6,6 +6,10 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		A426E69C2CFF4BDB00F54A8E /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = A426E69B2CFF4BDB00F54A8E /* README.md */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		A4737BAB2CFA09460099F175 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -24,6 +28,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		A426E69B2CFF4BDB00F54A8E /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		A4737B982CFA09450099F175 /* test.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = test.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A4737BAA2CFA09460099F175 /* testTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = testTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A4737BB42CFA09460099F175 /* testUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = testUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -88,6 +93,7 @@
 		A4737B8F2CFA09450099F175 = {
 			isa = PBXGroup;
 			children = (
+				A426E69B2CFF4BDB00F54A8E /* README.md */,
 				A4737B9A2CFA09450099F175 /* test */,
 				A4737BAD2CFA09460099F175 /* testTests */,
 				A4737BB72CFA09460099F175 /* testUITests */,
@@ -115,6 +121,7 @@
 				A4737B942CFA09450099F175 /* Sources */,
 				A4737B952CFA09450099F175 /* Frameworks */,
 				A4737B962CFA09450099F175 /* Resources */,
+				A426E69D2CFF4D7F00F54A8E /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -225,6 +232,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A426E69C2CFF4BDB00F54A8E /* README.md in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -243,6 +251,26 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		A426E69D2CFF4D7F00F54A8E /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\nopen -a Terminal \"`pwd`\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		A4737B942CFA09450099F175 /* Sources */ = {
