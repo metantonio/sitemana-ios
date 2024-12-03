@@ -29,18 +29,18 @@
 
 /* Begin PBXFileReference section */
 		A426E69B2CFF4BDB00F54A8E /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
-		A4737B982CFA09450099F175 /* test.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = test.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		A4737BAA2CFA09460099F175 /* testTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = testTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		A4737BB42CFA09460099F175 /* testUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = testUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		A4737B982CFA09450099F175 /* App Sitemana.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "App Sitemana.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		A4737BAA2CFA09460099F175 /* App SitemanaTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "App SitemanaTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		A4737BB42CFA09460099F175 /* App SitemanaUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "App SitemanaUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		A4E5CCB82CFE20E400FDAE1C /* Exceptions for "test" folder in "test" target */ = {
+		A4E5CCB82CFE20E400FDAE1C /* Exceptions for "test" folder in "App Sitemana" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				Info.plist,
 			);
-			target = A4737B972CFA09450099F175 /* test */;
+			target = A4737B972CFA09450099F175 /* App Sitemana */;
 		};
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
@@ -48,7 +48,7 @@
 		A4737B9A2CFA09450099F175 /* test */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
-				A4E5CCB82CFE20E400FDAE1C /* Exceptions for "test" folder in "test" target */,
+				A4E5CCB82CFE20E400FDAE1C /* Exceptions for "test" folder in "App Sitemana" target */,
 			);
 			path = test;
 			sourceTree = "<group>";
@@ -104,9 +104,9 @@
 		A4737B992CFA09450099F175 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				A4737B982CFA09450099F175 /* test.app */,
-				A4737BAA2CFA09460099F175 /* testTests.xctest */,
-				A4737BB42CFA09460099F175 /* testUITests.xctest */,
+				A4737B982CFA09450099F175 /* App Sitemana.app */,
+				A4737BAA2CFA09460099F175 /* App SitemanaTests.xctest */,
+				A4737BB42CFA09460099F175 /* App SitemanaUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -114,9 +114,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		A4737B972CFA09450099F175 /* test */ = {
+		A4737B972CFA09450099F175 /* App Sitemana */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = A4737BBE2CFA09460099F175 /* Build configuration list for PBXNativeTarget "test" */;
+			buildConfigurationList = A4737BBE2CFA09460099F175 /* Build configuration list for PBXNativeTarget "App Sitemana" */;
 			buildPhases = (
 				A4737B942CFA09450099F175 /* Sources */,
 				A4737B952CFA09450099F175 /* Frameworks */,
@@ -130,16 +130,16 @@
 			fileSystemSynchronizedGroups = (
 				A4737B9A2CFA09450099F175 /* test */,
 			);
-			name = test;
+			name = "App Sitemana";
 			packageProductDependencies = (
 			);
 			productName = test;
-			productReference = A4737B982CFA09450099F175 /* test.app */;
+			productReference = A4737B982CFA09450099F175 /* App Sitemana.app */;
 			productType = "com.apple.product-type.application";
 		};
-		A4737BA92CFA09460099F175 /* testTests */ = {
+		A4737BA92CFA09460099F175 /* App SitemanaTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = A4737BC12CFA09460099F175 /* Build configuration list for PBXNativeTarget "testTests" */;
+			buildConfigurationList = A4737BC12CFA09460099F175 /* Build configuration list for PBXNativeTarget "App SitemanaTests" */;
 			buildPhases = (
 				A4737BA62CFA09460099F175 /* Sources */,
 				A4737BA72CFA09460099F175 /* Frameworks */,
@@ -153,16 +153,16 @@
 			fileSystemSynchronizedGroups = (
 				A4737BAD2CFA09460099F175 /* testTests */,
 			);
-			name = testTests;
+			name = "App SitemanaTests";
 			packageProductDependencies = (
 			);
 			productName = testTests;
-			productReference = A4737BAA2CFA09460099F175 /* testTests.xctest */;
+			productReference = A4737BAA2CFA09460099F175 /* App SitemanaTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		A4737BB32CFA09460099F175 /* testUITests */ = {
+		A4737BB32CFA09460099F175 /* App SitemanaUITests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = A4737BC42CFA09460099F175 /* Build configuration list for PBXNativeTarget "testUITests" */;
+			buildConfigurationList = A4737BC42CFA09460099F175 /* Build configuration list for PBXNativeTarget "App SitemanaUITests" */;
 			buildPhases = (
 				A4737BB02CFA09460099F175 /* Sources */,
 				A4737BB12CFA09460099F175 /* Frameworks */,
@@ -176,11 +176,11 @@
 			fileSystemSynchronizedGroups = (
 				A4737BB72CFA09460099F175 /* testUITests */,
 			);
-			name = testUITests;
+			name = "App SitemanaUITests";
 			packageProductDependencies = (
 			);
 			productName = testUITests;
-			productReference = A4737BB42CFA09460099F175 /* testUITests.xctest */;
+			productReference = A4737BB42CFA09460099F175 /* App SitemanaUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
@@ -206,7 +206,7 @@
 					};
 				};
 			};
-			buildConfigurationList = A4737B932CFA09450099F175 /* Build configuration list for PBXProject "test" */;
+			buildConfigurationList = A4737B932CFA09450099F175 /* Build configuration list for PBXProject "App Sitemana" */;
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -220,9 +220,9 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				A4737B972CFA09450099F175 /* test */,
-				A4737BA92CFA09460099F175 /* testTests */,
-				A4737BB32CFA09460099F175 /* testUITests */,
+				A4737B972CFA09450099F175 /* App Sitemana */,
+				A4737BA92CFA09460099F175 /* App SitemanaTests */,
+				A4737BB32CFA09460099F175 /* App SitemanaUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -299,12 +299,12 @@
 /* Begin PBXTargetDependency section */
 		A4737BAC2CFA09460099F175 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = A4737B972CFA09450099F175 /* test */;
+			target = A4737B972CFA09450099F175 /* App Sitemana */;
 			targetProxy = A4737BAB2CFA09460099F175 /* PBXContainerItemProxy */;
 		};
 		A4737BB62CFA09460099F175 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = A4737B972CFA09450099F175 /* test */;
+			target = A4737B972CFA09450099F175 /* App Sitemana */;
 			targetProxy = A4737BB52CFA09460099F175 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -445,8 +445,8 @@
 				INFOPLIST_KEY_NSCameraUsageDescription = "We need access to your camera to scan QR codes.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait";
 				IPHONEOS_DEPLOYMENT_TARGET = 17.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -478,8 +478,8 @@
 				INFOPLIST_KEY_NSCameraUsageDescription = "We need access to your camera to scan QR codes.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait";
 				IPHONEOS_DEPLOYMENT_TARGET = 17.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -509,7 +509,7 @@
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/test.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/test";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/App Sitemana.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/App Sitemana";
 			};
 			name = Debug;
 		};
@@ -527,7 +527,7 @@
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/test.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/test";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/App Sitemana.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/App Sitemana";
 			};
 			name = Release;
 		};
@@ -566,7 +566,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		A4737B932CFA09450099F175 /* Build configuration list for PBXProject "test" */ = {
+		A4737B932CFA09450099F175 /* Build configuration list for PBXProject "App Sitemana" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				A4737BBC2CFA09460099F175 /* Debug */,
@@ -575,7 +575,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		A4737BBE2CFA09460099F175 /* Build configuration list for PBXNativeTarget "test" */ = {
+		A4737BBE2CFA09460099F175 /* Build configuration list for PBXNativeTarget "App Sitemana" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				A4737BBF2CFA09460099F175 /* Debug */,
@@ -584,7 +584,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		A4737BC12CFA09460099F175 /* Build configuration list for PBXNativeTarget "testTests" */ = {
+		A4737BC12CFA09460099F175 /* Build configuration list for PBXNativeTarget "App SitemanaTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				A4737BC22CFA09460099F175 /* Debug */,
@@ -593,7 +593,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		A4737BC42CFA09460099F175 /* Build configuration list for PBXNativeTarget "testUITests" */ = {
+		A4737BC42CFA09460099F175 /* Build configuration list for PBXNativeTarget "App SitemanaUITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				A4737BC52CFA09460099F175 /* Debug */,
