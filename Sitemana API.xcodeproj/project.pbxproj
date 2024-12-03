@@ -29,18 +29,18 @@
 
 /* Begin PBXFileReference section */
 		A426E69B2CFF4BDB00F54A8E /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
-		A4737B982CFA09450099F175 /* App Sitemana.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "App Sitemana.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		A4737BAA2CFA09460099F175 /* App SitemanaTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "App SitemanaTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		A4737BB42CFA09460099F175 /* App SitemanaUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "App SitemanaUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		A4737B982CFA09450099F175 /* Sitemana API.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Sitemana API.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		A4737BAA2CFA09460099F175 /* Sitemana APITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Sitemana APITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		A4737BB42CFA09460099F175 /* Sitemana APIUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Sitemana APIUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		A4E5CCB82CFE20E400FDAE1C /* Exceptions for "test" folder in "App Sitemana" target */ = {
+		A4E5CCB82CFE20E400FDAE1C /* Exceptions for "test" folder in "Sitemana API" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				Info.plist,
 			);
-			target = A4737B972CFA09450099F175 /* App Sitemana */;
+			target = A4737B972CFA09450099F175 /* Sitemana API */;
 		};
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
@@ -48,7 +48,7 @@
 		A4737B9A2CFA09450099F175 /* test */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
-				A4E5CCB82CFE20E400FDAE1C /* Exceptions for "test" folder in "App Sitemana" target */,
+				A4E5CCB82CFE20E400FDAE1C /* Exceptions for "test" folder in "Sitemana API" target */,
 			);
 			path = test;
 			sourceTree = "<group>";
@@ -104,9 +104,9 @@
 		A4737B992CFA09450099F175 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				A4737B982CFA09450099F175 /* App Sitemana.app */,
-				A4737BAA2CFA09460099F175 /* App SitemanaTests.xctest */,
-				A4737BB42CFA09460099F175 /* App SitemanaUITests.xctest */,
+				A4737B982CFA09450099F175 /* Sitemana API.app */,
+				A4737BAA2CFA09460099F175 /* Sitemana APITests.xctest */,
+				A4737BB42CFA09460099F175 /* Sitemana APIUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -114,9 +114,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		A4737B972CFA09450099F175 /* App Sitemana */ = {
+		A4737B972CFA09450099F175 /* Sitemana API */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = A4737BBE2CFA09460099F175 /* Build configuration list for PBXNativeTarget "App Sitemana" */;
+			buildConfigurationList = A4737BBE2CFA09460099F175 /* Build configuration list for PBXNativeTarget "Sitemana API" */;
 			buildPhases = (
 				A4737B942CFA09450099F175 /* Sources */,
 				A4737B952CFA09450099F175 /* Frameworks */,
@@ -130,16 +130,16 @@
 			fileSystemSynchronizedGroups = (
 				A4737B9A2CFA09450099F175 /* test */,
 			);
-			name = "App Sitemana";
+			name = "Sitemana API";
 			packageProductDependencies = (
 			);
 			productName = test;
-			productReference = A4737B982CFA09450099F175 /* App Sitemana.app */;
+			productReference = A4737B982CFA09450099F175 /* Sitemana API.app */;
 			productType = "com.apple.product-type.application";
 		};
-		A4737BA92CFA09460099F175 /* App SitemanaTests */ = {
+		A4737BA92CFA09460099F175 /* Sitemana APITests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = A4737BC12CFA09460099F175 /* Build configuration list for PBXNativeTarget "App SitemanaTests" */;
+			buildConfigurationList = A4737BC12CFA09460099F175 /* Build configuration list for PBXNativeTarget "Sitemana APITests" */;
 			buildPhases = (
 				A4737BA62CFA09460099F175 /* Sources */,
 				A4737BA72CFA09460099F175 /* Frameworks */,
@@ -153,16 +153,16 @@
 			fileSystemSynchronizedGroups = (
 				A4737BAD2CFA09460099F175 /* testTests */,
 			);
-			name = "App SitemanaTests";
+			name = "Sitemana APITests";
 			packageProductDependencies = (
 			);
 			productName = testTests;
-			productReference = A4737BAA2CFA09460099F175 /* App SitemanaTests.xctest */;
+			productReference = A4737BAA2CFA09460099F175 /* Sitemana APITests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		A4737BB32CFA09460099F175 /* App SitemanaUITests */ = {
+		A4737BB32CFA09460099F175 /* Sitemana APIUITests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = A4737BC42CFA09460099F175 /* Build configuration list for PBXNativeTarget "App SitemanaUITests" */;
+			buildConfigurationList = A4737BC42CFA09460099F175 /* Build configuration list for PBXNativeTarget "Sitemana APIUITests" */;
 			buildPhases = (
 				A4737BB02CFA09460099F175 /* Sources */,
 				A4737BB12CFA09460099F175 /* Frameworks */,
@@ -176,11 +176,11 @@
 			fileSystemSynchronizedGroups = (
 				A4737BB72CFA09460099F175 /* testUITests */,
 			);
-			name = "App SitemanaUITests";
+			name = "Sitemana APIUITests";
 			packageProductDependencies = (
 			);
 			productName = testUITests;
-			productReference = A4737BB42CFA09460099F175 /* App SitemanaUITests.xctest */;
+			productReference = A4737BB42CFA09460099F175 /* Sitemana APIUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
@@ -206,7 +206,7 @@
 					};
 				};
 			};
-			buildConfigurationList = A4737B932CFA09450099F175 /* Build configuration list for PBXProject "App Sitemana" */;
+			buildConfigurationList = A4737B932CFA09450099F175 /* Build configuration list for PBXProject "Sitemana API" */;
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -220,9 +220,9 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				A4737B972CFA09450099F175 /* App Sitemana */,
-				A4737BA92CFA09460099F175 /* App SitemanaTests */,
-				A4737BB32CFA09460099F175 /* App SitemanaUITests */,
+				A4737B972CFA09450099F175 /* Sitemana API */,
+				A4737BA92CFA09460099F175 /* Sitemana APITests */,
+				A4737BB32CFA09460099F175 /* Sitemana APIUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -299,12 +299,12 @@
 /* Begin PBXTargetDependency section */
 		A4737BAC2CFA09460099F175 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = A4737B972CFA09450099F175 /* App Sitemana */;
+			target = A4737B972CFA09450099F175 /* Sitemana API */;
 			targetProxy = A4737BAB2CFA09460099F175 /* PBXContainerItemProxy */;
 		};
 		A4737BB62CFA09460099F175 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = A4737B972CFA09450099F175 /* App Sitemana */;
+			target = A4737B972CFA09450099F175 /* Sitemana API */;
 			targetProxy = A4737BB52CFA09460099F175 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -509,7 +509,7 @@
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/App Sitemana.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/App Sitemana";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Sitemana API.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Sitemana API";
 			};
 			name = Debug;
 		};
@@ -527,7 +527,7 @@
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/App Sitemana.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/App Sitemana";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Sitemana API.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Sitemana API";
 			};
 			name = Release;
 		};
@@ -566,7 +566,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		A4737B932CFA09450099F175 /* Build configuration list for PBXProject "App Sitemana" */ = {
+		A4737B932CFA09450099F175 /* Build configuration list for PBXProject "Sitemana API" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				A4737BBC2CFA09460099F175 /* Debug */,
@@ -575,7 +575,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		A4737BBE2CFA09460099F175 /* Build configuration list for PBXNativeTarget "App Sitemana" */ = {
+		A4737BBE2CFA09460099F175 /* Build configuration list for PBXNativeTarget "Sitemana API" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				A4737BBF2CFA09460099F175 /* Debug */,
@@ -584,7 +584,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		A4737BC12CFA09460099F175 /* Build configuration list for PBXNativeTarget "App SitemanaTests" */ = {
+		A4737BC12CFA09460099F175 /* Build configuration list for PBXNativeTarget "Sitemana APITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				A4737BC22CFA09460099F175 /* Debug */,
@@ -593,7 +593,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		A4737BC42CFA09460099F175 /* Build configuration list for PBXNativeTarget "App SitemanaUITests" */ = {
+		A4737BC42CFA09460099F175 /* Build configuration list for PBXNativeTarget "Sitemana APIUITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				A4737BC52CFA09460099F175 /* Debug */,
