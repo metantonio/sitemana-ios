@@ -229,7 +229,7 @@ struct ContentView: View {
         if let firstKey = knownDomainIds.keys.first {
             domainId = firstKey
         }
-        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
             isLoadingScreen = false
         }
     }
