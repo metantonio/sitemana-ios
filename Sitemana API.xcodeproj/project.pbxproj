@@ -42,10 +42,10 @@
 
 /* Begin PBXFileReference section */
 		A426E69B2CFF4BDB00F54A8E /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
-		A4737B982CFA09450099F175 /* Sitemana API.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = "Sitemana API.app"; path = "/Users/developer01/RepositoriesIOS/test/build/Debug-iphoneos/Sitemana API.app"; sourceTree = "<absolute>"; };
 		A4737BAA2CFA09460099F175 /* Sitemana APITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = "Sitemana APITests.xctest"; path = "/Users/developer01/RepositoriesIOS/test/build/Debug-iphoneos/Sitemana API.app/PlugIns/Sitemana APITests.xctest"; sourceTree = "<absolute>"; };
 		A4737BB42CFA09460099F175 /* Sitemana APIUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = "Sitemana APIUITests.xctest"; path = "/Users/developer01/RepositoriesIOS/test/build/Debug-iphoneos/Sitemana APIUITests-Runner.app/PlugIns/Sitemana APIUITests.xctest"; sourceTree = "<absolute>"; };
 		A4E117FD2D01E2EC001B9469 /* Charts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Charts.framework; path = System/Library/Frameworks/Charts.framework; sourceTree = SDKROOT; };
+		A4E1181A2D020AF3001B9469 /* Sitemana API.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Sitemana API.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -112,6 +112,7 @@
 				A4737BAD2CFA09460099F175 /* testTests */,
 				A4737BB72CFA09460099F175 /* testUITests */,
 				A4E117FC2D01E2EC001B9469 /* Frameworks */,
+				A4E1181A2D020AF3001B9469 /* Sitemana API.app */,
 			);
 			sourceTree = "<group>";
 		};
@@ -147,7 +148,7 @@
 			packageProductDependencies = (
 			);
 			productName = test;
-			productReference = A4737B982CFA09450099F175 /* Sitemana API.app */;
+			productReference = A4E1181A2D020AF3001B9469 /* Sitemana API.app */;
 			productType = "com.apple.product-type.application";
 		};
 		A4737BA92CFA09460099F175 /* Sitemana APITests */ = {
@@ -466,7 +467,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.1;
 				NEW_SETTING = "";
 				PRODUCT_BUNDLE_IDENTIFIER = com.qlx.sitemana;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -498,7 +499,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.1;
 				NEW_SETTING = "";
 				PRODUCT_BUNDLE_IDENTIFIER = com.qlx.sitemana;
 				PRODUCT_NAME = "$(TARGET_NAME)";
