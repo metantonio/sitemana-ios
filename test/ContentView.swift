@@ -56,6 +56,13 @@ struct ContentView: View {
     //        }
     //    }
 
+    let sampleData: [[String: Any]] = [
+            ["createdAt": "2024-11-19T15:20:15.019Z", "email": "user1@example.com", "host": "example.com"],
+            ["createdAt": "2024-11-19T16:20:15.019Z", "email": "user2@example.com", "host": "example.com"],
+            ["createdAt": "2024-11-20T15:20:15.019Z", "email": "user1@example.com", "host": "example.com"],
+            ["createdAt": "2024-11-20T17:20:15.019Z", "email": "user3@example.com", "host": "example.com"]
+        ]
+    
     var body: some View {
         Group {
             if isLoadingScreen {
@@ -205,6 +212,7 @@ struct ContentView: View {
                     // Navegar cuando los resultados se reciban
                     .navigationDestination(isPresented: $isNavigating) {
                         VisitorListView(records: records)
+                        //VisitorListView(records: sampleData)
                     }
 
                     .sheet(isPresented: $showingAddDomainSheet) {
